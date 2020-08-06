@@ -16,8 +16,8 @@ const carrinho = [
   },
 ];
 
-const fragil = (item) => item.fragil;
-const getTotal = (item) => item.qtde * item.preco;
+const fragil = item => item.fragil;
+const getTotal = item => item.qtde * item.preco;
 const getMedia = (acc, el) => {
   const novoQtde = acc.qtde + 1;
   const novoTotal = acc.total + el;
