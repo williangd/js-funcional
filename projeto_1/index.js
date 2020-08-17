@@ -7,6 +7,8 @@ const simbolos = [
   '.', '?', '-', '"', ',', '♪', '_', '<i>', '</i>', '\r', '[', ']', '(', ')',
 ];
 
+
+
 fn.lerDiretorio(dir)
   .then(fn.elementosTerminadosCom('.srt'))
   .then(fn.lerArquivos)
@@ -19,4 +21,7 @@ fn.lerDiretorio(dir)
   .then(fn.mesclarElementos)
   .then(fn.separarPor(' '))
   .then(fn.removerElementosSeVazio)
+  .then(fn.removerElementosSeApenasNumero)
+  .then(fn.agruparElementos)
+  .then(fn.ordernarPorAtributoNumerico('qtde', 'desc'))
   .then(console.log);

@@ -49,11 +49,9 @@ function removerElementosSeApenasNumero(array) {
 function removerSimbolos(simbolos) {
   return function (array) {
     return array.map(el => {
-      let novoTexto = el;
-      simbolos.forEach(simbolo => {
-        novoTexto = novoTexto.split(simbolo).join('');
-      });
-      return novoTexto;
+      return simbolos.reduce((acc, simbolo) => {
+        return acc.split(simbolo).join('')
+      }, el)
     });
   };
 }
@@ -68,6 +66,24 @@ function separarPor(simbolo) {
   };
 }
 
+function agruparElementos(elementos) {
+  return Object.values(elementos.reduce((acc, elemento) => {
+    const p = elemento.toLowerCase();
+    const qtde = acc[p] ? acc[p].qtde + 1 : 1;
+
+    acc[p] = { elemento: p, qtde }
+    return acc
+  }, {}))
+}
+
+function ordernarPorAtributoNumerico(attr, ordem = 'asc') {
+  return function (array) {
+    const asc = (o1, o2) => o1[attr] - o2[attr];
+    const desc = (o1, o2) => o2[attr] - o1[attr];
+    return array.sort(ordem === 'asc' ? asc : desc)
+  }
+}
+
 module.exports = {
   lerDiretorio,
   elementosTerminadosCom,
@@ -78,4 +94,6 @@ module.exports = {
   removerSimbolos,
   mesclarElementos,
   separarPor,
+  agruparElementos,
+  ordernarPorAtributoNumerico
 };
